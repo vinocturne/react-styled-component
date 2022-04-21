@@ -4,30 +4,32 @@ const Father = styled.div`
   display: flex;
 `
 
-//속성을 동적으로 받아오고 싶을 때에는 해당 컴포넌트안에 속성명을 짓고
-//styled를 설정해줄 때 ${(props) => props.속성명}을 통해 해당 값을 가져올 수 있다.
-const Box = styled.div`
-  background-color: ${(props) => props.bgColor};
-  width: 100px;
-  height: 100px;
+//1. 해당 Btn에서 button 즉, 태그만 변경하고 싶은 경우
+// const Btn = styled.button`
+//   color:white;
+//   background-color: tomato;
+//   border: 0;
+//   border-radius: 15px;
+// `
+//2. 아래처럼 변경하게 되면 확장하게 되는 것임으로 이 방법을 사용하지는 않는다.
+// const Link = styled(Btn)``
+
+
+//4. 각 태그가 제공하는 기능들을 미리 설정할 수 있다.
+//.attrs({지정하고 싶은 attrs 설정 값})을 통해 하나하나 입력해주지 않아도 통일적으로 설정을 넣을 수 있다.
+const Input = styled.input.attrs({required:true, minLength: "10"})`
+  background-color: tomato;
 `
 
-//box가 가진 속성에 border-radius를 추가하고 싶을 때 복사, 
-//붙여넣기가 아닌 styled(가져오고 싶은 컴포넌트 이름)을 통해 모든 css를 받아올 수 있다.
-
-// const Circle = styled.div`
-const Circle = styled(Box)`
-  background-color: ${(props) => props.bgColor};
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
-`
 
 function App() {
   return (
-    <Father>
-      <Box bgColor="teal" />
-      <Circle bgColor="tomato"/>
+    <Father as="header">
+      {/* <Btn>Log in</Btn> */}
+      {/* 3. 확장 대신 사용할수 있는 방법은 as로써 변경하고 싶은 태그를 as를 통해 입력 후
+             필요한 속성들은 그대로 컴포넌트에서 작성하여 사용할 수 있다. */}
+      {/* <Btn as="a" href="/">Log in</Btn> */}
+      <Input />
     </Father>
   );
 }
