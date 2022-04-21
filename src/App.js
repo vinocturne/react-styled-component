@@ -1,11 +1,10 @@
-//1. styled-components 내의 keyframes 사용가능
 import styled, {keyframes} from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
 `
-
-//2.keyframes를 활용하여 css애니메이션 설정.
 const rotationAnimation = keyframes`
   0% {
     transform: rotate(0deg);
@@ -21,6 +20,10 @@ const rotationAnimation = keyframes`
   }
 `
 
+const Emoji = styled.span`
+  font-size: 36px;
+`
+
 const Box = styled.div`
   height: 200px;
   width: 200px;
@@ -28,21 +31,15 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   background-color: tomato;
-
-  // 3. 설정한 애니메이션을 적용할 때에는 props로 받아오는 것이 아니기 때문에 $ {}로 받아온다
   animation: ${rotationAnimation} 1s linear infinite;
-
-  // 4. styled-components로 선언하지 않은 태그의 경우 scss와 같이 바로 선언하여 사용 가능하다.
-  span {
+  
+  //Emoji 컴포넌트를 생성해주고 선언하게 되면 as를 통해 태그가 바뀌더라도 속성들이 그대로 유지된다.
+  ${Emoji} {
     font-size: 42px;
-
-    //5. span:hover와 같은 문법
     &:hover {
-      font-size: 50px;
+      font-size: 98px;
     }
-    &:active {
-      opacity: 0.3;
-    }
+    
   }
 
 `
@@ -52,7 +49,7 @@ function App() {
   return (
     <Wrapper>
       <Box>
-        <span>😎</span>
+        <Emoji>😎</Emoji>
       </Box>
     </Wrapper>
   );
