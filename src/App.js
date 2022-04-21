@@ -1,56 +1,24 @@
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
   align-items: center;
-`
-const rotationAnimation = keyframes`
-  0% {
-    transform: rotate(0deg);
-    border-radius: 0px;
-  }
-  50% {
-    
-    border-radius: 100px;
-  }
-  100% {
-    transform: rotate(360deg);
-    border-radius: 0px;
-  }
+  //ThemeProvider로 설정하게 되면 해당 properties를 받아올 수 있다.
+  //props.theme.속성명으로 해당 값을 css에 적용시킬 수 있다.
+  background-color: ${(props) => props.theme.backgroundColor}
 `
 
-const Emoji = styled.span`
-  font-size: 36px;
+const Title = styled.h1`
+  color: ${(props) => props.theme.textColor};
 `
-
-const Box = styled.div`
-  height: 200px;
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: tomato;
-  animation: ${rotationAnimation} 1s linear infinite;
-  
-  //Emoji 컴포넌트를 생성해주고 선언하게 되면 as를 통해 태그가 바뀌더라도 속성들이 그대로 유지된다.
-  ${Emoji} {
-    font-size: 42px;
-    &:hover {
-      font-size: 98px;
-    }
-    
-  }
-
-`
-
 
 function App() {
   return (
     <Wrapper>
-      <Box>
-        <Emoji>😎</Emoji>
-      </Box>
+      <Title>Hello</Title>
     </Wrapper>
   );
 }
