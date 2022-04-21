@@ -1,42 +1,57 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 
-//style.(사용하고자 하는 태그이름)에 백틱(`)을 이용해 css를 적용할 수 있다.
-const Father = styled.div`
+const Wrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const rotationAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+    border-radius: 0px;
+  }
+  50% {
+    
+    border-radius: 100px;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-radius: 0px;
+  }
 `
 
-const BoxOne = styled.div`
-  background-color: teal;
-  width: 100px;
-  height: 100px;
+const Emoji = styled.span`
+  font-size: 36px;
 `
 
-const BoxTwo = styled.div`
+const Box = styled.div`
+  height: 200px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: tomato;
-  width: 100px;
-  height: 100px;
+  animation: ${rotationAnimation} 1s linear infinite;
+  
+  //Emoji 컴포넌트를 생성해주고 선언하게 되면 as를 통해 태그가 바뀌더라도 속성들이 그대로 유지된다.
+  ${Emoji} {
+    font-size: 42px;
+    &:hover {
+      font-size: 98px;
+    }
+    
+  }
+
 `
 
-const Text = styled.span`
-  color: white;
-`
 
 function App() {
   return (
-    //styled component를 사용하면 div의 늪에서 자유로워질 수 있다.
-    //요소검사에서 class명은 styled-component에서 임의로 정해져 적용된다.
-    <Father>
-      <BoxOne>
-        <Text>Hello</Text>
-      </BoxOne>
-      <BoxTwo />
-    </Father>
-    
-    //가장 직관적이나 괄호를 각각 열어주어야하고 javascript 코드 방식으로 스타일을 지정해주어야 하는 단점이 있다.
-    // <div style={{display: "flex"}}>
-    //   <div style={{backgroundColor:"teal", width: 100, height: 100}}></div>
-    //   <div style={{backgroundColor:"tomato", width: 100, height: 100}}></div>
-    // </div>
+    <Wrapper>
+      <Box>
+        <Emoji>😎</Emoji>
+      </Box>
+    </Wrapper>
   );
 }
 
