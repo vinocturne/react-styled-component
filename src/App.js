@@ -1,36 +1,60 @@
-import styled from "styled-components";
+//1. styled-components 내의 keyframes 사용가능
+import styled, {keyframes} from "styled-components";
 
-const Father = styled.div`
+const Wrapper = styled.div`
   display: flex;
 `
 
-//1. 해당 Btn에서 button 즉, 태그만 변경하고 싶은 경우
-// const Btn = styled.button`
-//   color:white;
-//   background-color: tomato;
-//   border: 0;
-//   border-radius: 15px;
-// `
-//2. 아래처럼 변경하게 되면 확장하게 되는 것임으로 이 방법을 사용하지는 않는다.
-// const Link = styled(Btn)``
+//2.keyframes를 활용하여 css애니메이션 설정.
+const rotationAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+    border-radius: 0px;
+  }
+  50% {
+    
+    border-radius: 100px;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-radius: 0px;
+  }
+`
 
-
-//4. 각 태그가 제공하는 기능들을 미리 설정할 수 있다.
-//.attrs({지정하고 싶은 attrs 설정 값})을 통해 하나하나 입력해주지 않아도 통일적으로 설정을 넣을 수 있다.
-const Input = styled.input.attrs({required:true, minLength: "10"})`
+const Box = styled.div`
+  height: 200px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: tomato;
+
+  // 3. 설정한 애니메이션을 적용할 때에는 props로 받아오는 것이 아니기 때문에 $ {}로 받아온다
+  animation: ${rotationAnimation} 1s linear infinite;
+
+  // 4. styled-components로 선언하지 않은 태그의 경우 scss와 같이 바로 선언하여 사용 가능하다.
+  span {
+    font-size: 42px;
+
+    //5. span:hover와 같은 문법
+    &:hover {
+      font-size: 50px;
+    }
+    &:active {
+      opacity: 0.3;
+    }
+  }
+
 `
 
 
 function App() {
   return (
-    <Father as="header">
-      {/* <Btn>Log in</Btn> */}
-      {/* 3. 확장 대신 사용할수 있는 방법은 as로써 변경하고 싶은 태그를 as를 통해 입력 후
-             필요한 속성들은 그대로 컴포넌트에서 작성하여 사용할 수 있다. */}
-      {/* <Btn as="a" href="/">Log in</Btn> */}
-      <Input />
-    </Father>
+    <Wrapper>
+      <Box>
+        <span>😎</span>
+      </Box>
+    </Wrapper>
   );
 }
 
